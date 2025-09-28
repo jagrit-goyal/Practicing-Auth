@@ -15,7 +15,7 @@ function Signup() {
       await API.post("/auth/signup", form);
       navigate("/"); // redirect to login
     } catch (err) {
-      setError(err.response?.data?.msg || "Something went wrong");
+      setError(err.response?.data?.message || "Something went wrong");
     }
   };
 

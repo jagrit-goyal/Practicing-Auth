@@ -9,18 +9,22 @@ exports.signup = async (req, res) => {
         const { name, email, password } = req.body;
 
         const userExists = await User.findOne({email});
-        if(userExists) return res.status(400).json({message: "User already exists"});
+        if(userExists) {
+            return res.status(400).json({message: "User already exists"});
+        }
 
         const hashedPassword = await bcrypt.hash(password, 10); //salt rounds = 10 , more rounds = more secure but slower
 
         const newUser = new User({name, email, password: hashedPassword});
         await newUser.save();
 
+
         res.json({ msg: "User registered successfully" });
     }
 
     catch (err) 
     {
+        console.error("Error during signup:", err);
         res.status(500).json({ error: err.message });
     }
 

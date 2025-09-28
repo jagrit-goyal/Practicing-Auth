@@ -16,7 +16,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       navigate("/home");
     } catch (err) {
-      setError(err.response?.data?.msg || "Invalid credentials");
+      setError(err.response?.data?.message || "Invalid credentials");
     }
   };
 
